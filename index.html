@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    
+    <title>Producto</title>
+  </head>
+  <body>
+    
+
+    <div class="container">
+        <h1>Producto</h1>
+        <div class="row">
+                <form action="" method="POST" id="addProducto">
+                    <div class="col-md-12">
+                            <div class="form-group">
+                                    <label for="nombre_producto">Nombre del producto:</label>
+                                    <input type="text" class="form-control" name="nombre_producto" id="nombre_producto" value="" placeholder="Indique el nombre del producto">
+                            </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                            <div class="form-group">
+                                    <label for="cantidad_existencia">Cantidad de existencias:</label>
+                                    <input type="text" class="form-control" name="cantidad_existencia" id="cantidad_existencia" placeholder="Indique la cantidad de existencias">
+                            </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                              <label for="precio">Precio:</label>
+                              <input type="text" class="form-control" name="precio" id="precio" placeholder="Indique el precio">
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                        <input class="btn btn-lg btn-success" type="submit" value="Enviar">
+                    </div>
+                  </form> 
+        </div>
+        <br>
+        <div class="row">
+            
+                <table class="table" id="tableProducto">
+                        <thead>
+                          <tr>
+                            <th>id</th>
+                            <th>Nombre del producto</th>
+                            <th>Existencias</th>
+                            <th>Precio</th>
+                            <th>Modificar</th>
+                            <th>Eliminar</th>
+                          </tr>
+                        </thead>
+                        <tbody id="dataTable">
+                          
+                        </tbody>
+                </table>
+        </div>
+    </div>
+
+    <div id="ShowUpdateProducto" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Modificar Producto</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                        <form id="formUpdateProducto">
+                                <input type="hidden" id="idproducto_update" name="idproducto"/>
+                                <div class="col-md-12">
+                                        <div class="form-group">
+                                                <label for="nombre_producto">Nombre del producto:</label>
+                                                <input type="text" class="form-control" name="nombre_producto" id="nombre_producto_update" value="" placeholder="Indique nombre el nombre del producto">
+                                        </div>
+                                </div>
+                                <div class="col-md-6">
+            
+                                        <div class="form-group">
+                                                <label for="cantidad_existencia">Cantidad de existencias:</label>
+                                                <input type="text" class="form-control" name="cantidad_existencia" id="cantidad_existencia_update" placeholder="Indique la cantidad de existencias">
+                                        </div>
+                                </div>
+                                <div class="col-md-6">
+            
+                                        <div class="form-group">
+                                                <label for="precio">Precio:</label>
+                                                <input type="text" class="form-control" name="precio" id="precio_update" placeholder="Indique el precio">
+                                        </div>
+                                </div>
+                        
+                </div>
+                <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn" id="btn-cancel">Cancelar</button>
+                        <button type="submit" class="btn btn-warning" id="btnUpdateProducto">Cambiar</button>
+                </div>
+
+                </form>
+              </div>
+          
+            </div>
+    </div>
+
+    <div id="ShowDeleteProducto" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+          
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                        <h4 class="modal-title">Eliminar producto</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <p>¿Desea eliminar este registro?</p>
+                  <form id="formDeleteProducto">
+                        <input type="hidden" id="idproducto_delete" name="idproducto"/>
+                </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn" id="btn-cancel">Cancelar</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-danger" id="btnDeleteProducto">Eliminar</button>
+                </div>
+              </div>
+          
+            </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- Latest compiled and minified CSS -->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script src="formValidation.js" ></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+    <script>
+
+    $('#addProducto').formValidation({
+                framework: 'bootstrap',
+                icon: {
+                  valid: 'glyphicon glyphicon-ok',
+                  invalid: 'glyphicon glyphicon-remove',
+                  validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                 'nombre_producto': {
+                  validators: {
+                    notEmpty: {
+                      message: 'El campo no puede quedar vacío'
+                    }
+                  }
+                },
+                'cantidad_existencia': {
+                  validators: {
+                    notEmpty: {
+                      message: 'Debe de seleccionar un tipo de teléfono'
+                    }
+                  }
+                },
+                'precio': {
+                  validators: {
+                    notEmpty: {
+                      message: 'El campo no puede quedar vacío'
+                    }
+                  }
+                }
+              }
+            }).on('success.form.fv', function(e,data) {
+                saveData();
+    });
+
+    $('#formUpdateProducto').formValidation({
+                framework: 'bootstrap',
+                icon: {
+                  valid: 'glyphicon glyphicon-ok',
+                  invalid: 'glyphicon glyphicon-remove',
+                  validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                 'nombre_producto_update': {
+                  validators: {
+                    notEmpty: {
+                      message: 'El campo no puede quedar vacío'
+                    }
+                  }
+                },
+                'cantidad_existencia_update': {
+                  validators: {
+                    notEmpty: {
+                      message: 'El campo no puede quedar vacío'
+                    }
+                  }
+                },
+                'precio_update': {
+                  validators: {
+                    notEmpty: {
+                      message: 'El campo no puede quedar vacío'
+                    }
+                  }
+                }
+              }
+            }).on('success.form.fv', function(e,data) {
+                updateProducto();   
+                $('#ShowUpdateProducto').modal('hide');
+    });
+      
+    listData();  
+
+    function saveData(){
+         
+          var param = new FormData($('#addProducto')[0]);
+
+          $.ajax({
+              type: 'POST',
+              url: '../apibackend/addproduct',
+              data: param,
+              dataType: 'json',
+              async:true,
+              contentType:false,
+              processData:false,
+              cache:false,
+              success: function(data) {
+                var status = data.status;
+                if(status == "success"){
+                    swal({title: "Excelente", text: "¡Gracias por comunicarte con nosotros!", type: 
+                        "success"}).then(function(){ 
+                            location.reload();
+                        }
+                    );
+                }else{
+                  swal("Error", "¡Por favor intente de nuevo!", "error");
+                }
+              },
+              error: function(error) {
+                console.log(error);
+                swal("Error", "¡Por favor intente de nuevo!", "error");
+              }
+          });
+      }
+
+    function listData(){
+         
+        $.get("../apibackend/listproducts", function(data) {
+
+          var options = $('#dataTable');
+          options.empty();
+          var datos  = data.data;
+          if (data.status == "success") {
+              var tamano            = datos.length;
+              for(var i = 0; i < tamano; i++){
+                var idproducto = datos[i].idproducto;
+                var nombre_producto = datos[i].nombre_producto;
+                var cantidad_existencia = datos[i].cantidad_existencia;
+                var precio = datos[i].precio;
+
+                options.append('<tr>'+
+                        '<td>'+idproducto+'</td>'+
+                        '<td>'+nombre_producto+'</td>'+
+                      '<td>'+cantidad_existencia+'</td>'+
+                      '<td>'+precio+'</td>'+
+                      '<td><button type="button" data-toggle="modal" onClick="ShowUpdateProducto(this)" data-idproducto="'+idproducto+'" data-nombre="'+nombre_producto+'" data-target="#ShowUpdateProducto" class="btn btn-warning"><i class="fas fa-pen"></i></button></td>'+
+                      '<td><button type="button" data-toggle="modal" onClick="ShowDeleteProducto(this)" data-idproducto="'+idproducto+'" data-target="#ShowDeleteProducto" class="btn btn-danger"><i class="fas fa-trash"></i></button></td>'+
+                      '</tr>');
+              }
+          }else{
+            $('#dataTable').append('<tr>'+
+                        '<td>No hay información disponible</td>'+
+                      '</tr>');
+          }
+        });
+     }
+
+    function ShowUpdateProducto(elem){
+      var id_update = $(elem).data("idproducto");
+      var nombre_update = $(elem).data("nombre");
+      var cantidad_existencia = $(elem).data("cantidad_existencia");
+      var precio = $(elem).data("precio");
+      $('#idproducto_update').val(id_update);
+      $('#nombre_producto_update').val(nombre_update);
+      $('#cantidad_existencia_update').val(cantidad_existencia);
+      $('#precio_update').val(precio);
+     }
+
+    function updateProducto(){
+        var dataForm = new FormData($('#formUpdateProducto')[0]);
+         $.ajax({
+             type: 'POST',
+             url: '../apibackend/updateproduct',
+             data: dataForm,
+             dataType: 'json',
+             async:true,
+             contentType:false,
+             processData:false,
+             cache:false,
+             success: function(data) {
+               var status = data.status;
+               if(status == 'success'){
+                 swal({title: "Excelente", text: "¡Registro modificado exitosamente!", type: 
+                        "success"}).then(function(){ 
+                            location.reload();
+                 });
+               }else{
+                 swal("Error", "¡Por favor intente de nuevo!", "error");
+               }
+             },
+             error: function(error) {
+               console.log(error);
+               swal("Error", "¡Por favor intente de nuevo!", "error");
+             }
+         });
+     }
+     
+     function ShowDeleteProducto(elem){
+        var id_delete = $(elem).data("idproducto");
+        $('#idproducto_delete').val(id_delete);
+     } 
+    
+     $('#btnDeleteProducto').click( function() {
+        deleteProducto();
+    });
+    
+    function deleteProducto(){
+        var dataForm = new FormData($('#formDeleteProducto')[0]);
+         $.ajax({
+             type: 'POST',
+             url: '../apibackend/deleteproduct',
+             data: dataForm,
+             dataType: 'json',
+             async:true,
+             contentType:false,
+             processData:false,
+             cache:false,
+             success: function(data) {
+               var status = data.status;
+               if(status == 'success'){
+                    swal({title: "Excelente", text: "¡Registro borrado exitosamente!", type: 
+                        "success"}).then(function(){ 
+                            location.reload();
+                        }
+                    ); 
+               }else{
+                 swal("Error", "¡Por favor intente de nuevo!", "error");
+               }
+             },
+             error: function(error) {
+               console.log(error);
+               swal("Error", "¡Por favor intente de nuevo!", "error");
+             }
+         });
+     }
+    
+    </script>
+  </body>
+</html>
